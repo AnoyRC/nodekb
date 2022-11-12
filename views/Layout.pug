@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title knowledgebase
+    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    header.p-3.text-bg-dark
+      .container
+        .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+          a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href='/')
+            svg.bi.me-2(width='40' height='32' role='img' aria-label='Bootstrap')
+              use(xlink:href='#bootstrap')
+          a.navbar-brand(href='/') KnowledgeBase
+          ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+            li
+              a.nav-link.px-2.text-white(href='/') Home
+            if user
+              li
+                a.nav-link.px-2.text-white(href='/articles/add') Add Article
+          ul.nav.navbar-right.mb-2.justify-content-center.mb-md-0
+            if user
+              li 
+                a.nav-link.px-2.text-white(href='/users/logout') Logout
+            else
+              li
+                a.nav-link.px-2.text-white(href='/users/register') Register
+              li
+                a.nav-link.px-2.text-white(href='/users/login') Login
+    .container
+      br
+      != messages('message', locals)
+      if errors
+       each error, i in errors.errors
+         div(class="alert alert-danger") #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p copyright &copy; 2022
+      script(src='/bower_components/jquery/dist/jquery.js')
+      script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+      script(src='/js/main.js')
